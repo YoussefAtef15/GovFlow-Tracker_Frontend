@@ -1,0 +1,98 @@
+<div class="page">
+  <nav class="breadcrumb-nav">
+    <ol class="breadcrumb-list">
+      <li><a routerLink="/citizen-dashboard" class="breadcrumb-link">Dashboard</a></li>
+      <li class="breadcrumb-separator"><i class="fas fa-chevron-right"></i></li>
+      <li><a routerLink="/municipality-services" class="breadcrumb-link">Services</a></li>
+      <li class="breadcrumb-separator"><i class="fas fa-chevron-right"></i></li>
+      <li class="breadcrumb-item active">Building Permit</li>
+    </ol>
+  </nav>
+
+  <div class="form-container">
+    <div class="form-header">
+      <h1 class="form-title">Building Permit</h1>
+      <p class="form-description">Apply for a new building construction or renovation permit.</p>
+      <div class="documents-container">
+        <h3 class="documents-title">Required Documents:</h3>
+        <ul class="documents-list">
+          <li>• Property Deed</li>
+          <li>• Construction Plans</li>
+          <li>• Engineer Report</li>
+        </ul>
+      </div>
+    </div>
+
+    <form [formGroup]="permitForm" (ngSubmit)="onSubmit()">
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" formControlName="fullName" readonly class="form-input readonly-input">
+        </div>
+        <div class="form-group">
+          <label>National ID</label>
+          <input type="text" formControlName="nationalId" readonly class="form-input readonly-input">
+        </div>
+      </div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Property ID Number</label>
+          <input type="text" formControlName="propertyId" required class="form-input">
+          <div *ngIf="permitForm.get('propertyId')?.invalid && permitForm.get('propertyId')?.touched" class="form-error">
+            Property ID is required.
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Construction Type</label>
+          <select formControlName="constructionType" class="form-select">
+            <option>New Construction</option>
+            <option>Renovation</option>
+            <option>Demolition</option>
+            <option>Addition</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Document Attachments</label>
+        <div class="upload-area" (click)="triggerFileInput()" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)" (drop)="onDrop($event)" [class.drag-over]="isDragging">
+          <i class="fas fa-cloud-upload-alt upload-icon"></i>
+          <p class="upload-text">Drag and drop files here or click to browse</p>
+          <input type="file" multiple class="hidden" id="fileUpload" (change)="onFileSelected($event)" accept="image/png, image/jpeg, application/pdf">
+        </div>
+        <div class="uploaded-files-list" *ngIf="uploadedFiles.length > 0">
+          <p>Selected files:</p>
+          <div *ngFor="let file of uploadedFiles; let i = index" class="uploaded-file-item">
+            <span>{{file.name}}</span>
+            <button type="button" (click)="removeFile(i)"><i class="fas fa-times"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="processing-info">
+        <p><i class="fas fa-clock"></i> Estimated processing time: 10-14 business days</p>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="submit-button" [disabled]="isLoading">
+          <i class="fas fa-paper-plane"></i>
+          {{ isLoading ? 'Submitting...' : 'Submit Request' }}
+        </button>
+        <button type="button" (click)="goBack()" class="cancel-button">Cancel</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="modal-backdrop" *ngIf="isAlertVisible" (click)="hideAlert()">
+    <div class="modal-content" (click)="$event.stopPropagation()" [ngClass]="alertType">
+      <div class="icon-wrapper">
+        <i *ngIf="alertType === 'success'" class="fas fa-check-circle"></i>
+        <i *ngIf="alertType === 'error'" class="fas fa-times-circle"></i>
+      </div>
+      <h2 class="modal-title">{{ alertTitle }}</h2>
+      <p class="modal-message">{{ alertMessage }}</p>
+      <button class="modal-button" (click)="hideAlert()">Close</button>
+    </div>
+  </div>
+</div>

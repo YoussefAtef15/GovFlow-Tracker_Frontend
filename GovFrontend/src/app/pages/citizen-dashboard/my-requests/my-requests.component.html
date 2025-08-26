@@ -1,0 +1,75 @@
+<div class="page-container">
+  <header class="page-header">
+    <h1>My Requests</h1>
+    <p>Track the status and details of all your service requests.</p>
+  </header>
+
+  <div class="content-card">
+    <div class="filters">
+      <label for="statusFilter">Filter by status:</label>
+      <select id="statusFilter" [(ngModel)]="statusFilter" (change)="filterRequests()">
+        <option value="all">All</option>
+        <option value="under-review">Under Review</option>
+        <option value="in-progress">In Progress</option>
+        <option value="approved">Approved</option>
+        <option value="rejected">Rejected</option>
+      </select>
+    </div>
+
+    <div *ngIf="loading" class="loading-state">Loading your requests...</div>
+    <div *ngIf="error" class="error-state">{{ error }}</div>
+
+    <div *ngIf="!loading && !error" class="requests-list">
+      <div *ngFor="let request of filteredRequests" class="request-card">
+        <div class="request-header">
+          <div>
+            <h3 class="service-name">{{ request.serviceName }}</h3>
+            <p class="request-id">Request ID: #{{ request.id }}</p>
+            <p class="submitted-date">Submitted: {{ request.submittedDate | date: 'mediumDate' }}</p>
+          </div>
+          <span class="status-badge" [ngClass]="getStatusClass(request.status)">{{ request.status }}</span>
+        </div>
+
+        <div class="progress-bar-container" *ngIf="request.progress !== undefined">
+          <div class="progress-bar" [style.width.%]="request.progress || 0"></div>
+        </div>
+        <div class="progress-labels" *ngIf="request.progress !== undefined">
+          <span>Submitted</span>
+          <span>Under Review</span>
+          <span>Decision</span>
+        </div>
+
+        <!-- ✅ الإصلاح هنا: استخدام القيمة الافتراضية -->
+        <div class="employee-comments" *ngIf="request.employeeComments">
+          <h4>Employee Comments:</h4>
+          <p>{{ request.employeeComments }}</p>
+        </div>
+
+        <div class="documents-section">
+          <div class="document-list">
+            <h4>Uploaded Documents</h4>
+            <ul>
+              <li *ngFor="let doc of request.uploadedDocuments">
+                <i class="fas" [ngClass]="doc.type === 'pdf' ? 'fa-file-pdf' : 'fa-file-image'"></i>
+                <span>{{ doc.name }}</span>
+                <div>
+                  <button (click)="viewDocument(doc.name)" class="btn-link">View</button>
+                  <button (click)="downloadDocument(doc.name)" class="btn-link">Download</button>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="upload-box">
+            <i class="fas fa-plus"></i>
+            <p>Upload missing documents</p>
+            <button (click)="fileInput.click()" class="btn-primary">Choose Files</button>
+            <input type="file" #fileInput style="display: none" (change)="onFileSelected($event, request)" />
+          </div>
+        </div>
+      </div>
+      <div *ngIf="filteredRequests.length === 0" class="no-results">
+        No requests found matching your filter.
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,219 @@
+<div class="employee-dashboard">
+  <div class="dashboard-container">
+    <div class="dashboard-layout">
+      <div class="sidebar">
+        <div class="employee-info">
+          <div class="avatar">{{ employee.initial }}</div>
+          <div>
+            <p class="employee-name">{{ employee.name }}</p>
+            <p class="employee-department">{{ employee.department }}</p>
+          </div>
+        </div>
+
+        <nav class="sidebar-nav">
+          <a routerLink="/employee-dashboard" class="nav-item active">
+            <i class="fas fa-tachometer-alt nav-icon"></i>
+            Dashboard
+          </a>
+          <a routerLink="/employee-tasks" class="nav-item">
+            <i class="fas fa-tasks nav-icon"></i>
+            My Tasks
+          </a>
+
+          <a routerLink="/profile" class="nav-item">
+            <i class="fas fa-user nav-icon"></i>
+            Profile
+          </a>
+          <a routerLink="/help" class="nav-item">
+            <i class="fas fa-question-circle nav-icon"></i>
+            Help Center
+          </a>
+        </nav>
+      </div>
+
+      <div class="main-content">
+        <div class="dashboard-header">
+          <h1 class="dashboard-title">Employee Dashboard</h1>
+          <p class="dashboard-subtitle">Manage and process service requests</p>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-content">
+              <div class="stat-icon pending">
+                <i class="fas fa-clock"></i>
+              </div>
+              <div>
+                <p class="stat-number">{{ stats.pending }}</p>
+                <p class="stat-label">Pending</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-content">
+              <div class="stat-icon review">
+                <i class="fas fa-eye"></i>
+              </div>
+              <div>
+                <p class="stat-number">{{ stats.underReview }}</p>
+                <p class="stat-label">Under Review</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-content">
+              <div class="stat-icon approved">
+                <i class="fas fa-check"></i>
+              </div>
+              <div>
+                <p class="stat-number">{{ stats.approved }}</p>
+                <p class="stat-label">Approved</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-content">
+              <div class="stat-icon rejected">
+                <i class="fas fa-times"></i>
+              </div>
+              <div>
+                <p class="stat-number">{{ stats.rejected }}</p>
+                <p class="stat-label">Rejected</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="requests-table">
+          <div class="table-header">
+            <h3 class="table-title">Service Requests</h3>
+            <div class="table-filters">
+              <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input
+                  type="text"
+                  class="search-input"
+                  placeholder="Search requests..."
+                  [(ngModel)]="searchTerm"
+                  (input)="applyFilters()">
+              </div>
+              <select
+                class="filter-select"
+                [(ngModel)]="statusFilter"
+                (change)="applyFilters()">
+                <option value="all">All Requests</option>
+                <option value="pending">Pending</option>
+                <option value="underReview">Under Review</option>
+                <option value="approved">Approved</option>
+                <option value="rejected">Rejected</option>
+              </select>
+              <select
+                class="filter-select"
+                [(ngModel)]="serviceFilter"
+                (change)="applyFilters()">
+                <option value="all">All Services</option>
+                <option value="License Services">License Services</option>
+                <option value="Permits">Permits</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="table-container">
+            <table>
+              <thead>
+              <tr>
+                <th>Request ID</th>
+                <th>Citizen</th>
+                <th>Service</th>
+                <th>Date</th>
+                <th>Priority</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let request of filteredRequests">
+                <td>{{ request.id }}</td>
+                <td>{{ request.citizenName }}</td>
+                <td>{{ request.serviceType }}</td>
+                <td>{{ request.date | date:'MMM d, y' }}</td>
+                <td>
+                    <span
+                      class="priority-badge"
+                      [class.priority-normal]="request.priority === 'normal'"
+                      [class.priority-high]="request.priority === 'high'"
+                      [class.priority-low]="request.priority === 'low'">
+                      {{ request.priority }}
+                    </span>
+                </td>
+                <td>
+                  <select
+                    class="filter-select"
+                    [value]="request.status"
+                    (change)="updateRequestStatus(request.id, $event)">
+                    <option value="pending">Pending</option>
+                    <option value="underReview">Under Review</option>
+                    <option value="approved">Approved</option>
+                    <option value="rejected">Rejected</option>
+                  </select>
+                </td>
+                <td>
+                  <div class="action-buttons">
+                    <button
+                      class="action-btn view-btn"
+                      (click)="viewDocuments(request.id)">
+                      View
+                    </button>
+                    <button
+                      class="action-btn approve-btn"
+                      (click)="approveRequest(request.id)">
+                      Approve
+                    </button>
+                    <button
+                      class="action-btn reject-btn"
+                      (click)="rejectRequest(request.id)">
+                      Reject
+                      Reject
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div *ngIf="isModalVisible" class="modal-overlay" (click)="closeModal()">
+          <div class="modal-content" (click)="$event.stopPropagation()">
+            <div class="modal-header">
+              <h2 class="modal-title">Request Documents</h2>
+              <button class="modal-close-btn" (click)="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+              <div *ngIf="selectedRequest">
+                <p><strong>Request ID:</strong> {{ selectedRequest.id }}</p>
+                <p><strong>Citizen:</strong> {{ selectedRequest.citizenName }}</p>
+                <hr class="modal-divider">
+                <h3 class="documents-subtitle">Attached Documents</h3>
+                <ul class="document-list">
+                  <li *ngFor="let doc of selectedRequestDocuments" class="document-item">
+                    <i class="fas fa-file-alt document-icon"></i>
+                    <span class="document-name">{{ doc.name }}</span>
+                    <a [href]="doc.url" target="_blank" class="document-download-link">Download</a>
+                  </li>
+                </ul>
+                <div *ngIf="selectedRequestDocuments.length === 0" class="no-documents">
+                  <p>No documents found for this request.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

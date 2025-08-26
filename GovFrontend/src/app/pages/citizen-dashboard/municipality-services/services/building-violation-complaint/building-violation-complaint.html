@@ -1,0 +1,113 @@
+<div class="page">
+  <nav class="breadcrumb-nav">
+    <ol class="breadcrumb-list">
+      <li><a routerLink="/citizen-dashboard" class="breadcrumb-link">Dashboard</a></li>
+      <li class="breadcrumb-separator"><i class="fas fa-chevron-right"></i></li>
+      <li><a routerLink="/municipality-services" class="breadcrumb-link">Services</a></li>
+      <li class="breadcrumb-separator"><i class="fas fa-chevron-right"></i></li>
+      <li class="breadcrumb-item active">Building Violation Complaint</li>
+    </ol>
+  </nav>
+
+  <div class="form-container">
+    <div class="form-header">
+      <h1 class="form-title">Building Violation Complaint</h1>
+      <p class="form-description">Report a building violation to the municipality authorities.</p>
+      <div class="documents-container">
+        <h3 class="documents-title">Required Information:</h3>
+        <ul class="documents-list">
+          <li>• Photos of the violation</li>
+          <li>• Exact location / address</li>
+          <li>• Date and time of observation</li>
+        </ul>
+      </div>
+    </div>
+
+    <form (ngSubmit)="submitComplaint($event)" class="space-y-6">
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" [value]="fullName" readonly class="form-input readonly-input">
+        </div>
+        <div class="form-group">
+          <label>National ID</label>
+          <input type="text" [value]="nationalId" readonly class="form-input readonly-input">
+        </div>
+      </div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Violation Location</label>
+          <input type="text" [(ngModel)]="violationLocation" name="violationLocation" required
+                 class="form-input"
+                 placeholder="Enter the address or coordinates of the violation">
+        </div>
+        <div class="form-group">
+          <label>Violation Type</label>
+          <select [(ngModel)]="violationType" name="violationType" class="form-select">
+            <option *ngFor="let type of violationTypes" [value]="type">{{type}}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Violation Details</label>
+        <textarea [(ngModel)]="violationDetails" name="violationDetails" rows="4" required
+                  class="form-textarea"
+                  placeholder="Describe the violation including observed activities, structure issues, or unauthorized construction"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Evidence Attachments (Photos / Documents)</label>
+        <div
+          class="upload-area"
+          (click)="triggerFileInput()"
+          (dragover)="onDragOver($event)"
+          (dragleave)="onDragLeave($event)"
+          (drop)="onDrop($event)"
+          [class.drag-over]="isDragging">
+          <i class="fas fa-cloud-upload-alt upload-icon"></i>
+          <p class="upload-text">Drag and drop files here or click to browse</p>
+          <input type="file" multiple class="hidden" id="fileUpload" (change)="onFileSelected($event)" accept="image/png, image/jpeg, application/pdf">
+          <button type="button" (click)="triggerFileInput()" class="submit-button bg-gov-blue hover:bg-gov-dark-blue">
+            Choose Files
+          </button>
+        </div>
+        <div class="uploaded-files-list" [class.hidden]="!showUploadedFiles">
+          <p class="font-medium text-sm text-gray-700">Selected files:</p>
+          <div *ngFor="let file of uploadedFiles; let i = index" class="uploaded-file-item">
+            <span class="uploaded-file-name">{{file.name}}</span>
+            <button type="button" (click)="removeFile(i)" class="text-red-500 hover:text-red-700">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="processing-info">
+        <p><i class="fas fa-clock"></i> Estimated response time: 3-5 business days</p>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="submit-button">
+          <i class="fas fa-paper-plane"></i>Submit Complaint
+        </button>
+        <button type="button" (click)="goBack()" class="cancel-button">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="modal-backdrop" *ngIf="isAlertVisible" (click)="hideAlert()">
+  <div class="modal-content" (click)="$event.stopPropagation()" [ngClass]="alertType">
+    <div class="icon-wrapper">
+      <i *ngIf="alertType === 'success'" class="fas fa-check-circle"></i>
+      <i *ngIf="alertType === 'error'" class="fas fa-times-circle"></i>
+    </div>
+    <h2 class="modal-title">{{ alertTitle }}</h2>
+    <p class="modal-message">{{ alertMessage }}</p>
+    <button class="modal-button" (click)="hideAlert()">Close</button>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+<div class="notifications-page">
+  <div class="header">
+    <h1 class="title">All Notifications</h1>
+    <p class="subtitle">Here is a complete list of your past and present notifications.</p>
+  </div>
+
+  <!-- ✅ عرض رسالة أثناء تحميل البيانات -->
+  <div *ngIf="isLoading()" class="loading-state">
+    <p>Loading notifications...</p>
+  </div>
+
+  <!-- ✅ عرض الإشعارات بعد انتهاء التحميل -->
+  <div *ngIf="!isLoading()" class="notifications-list">
+    <!-- رسالة في حالة عدم وجود إشعارات -->
+    <div *ngIf="notifications().length === 0" class="empty-state">
+      <i class="fas fa-bell-slash"></i>
+      <p>You have no notifications.</p>
+    </div>
+
+    <!-- ✅ عرض كل إشعار في كارت منفصل -->
+    <div *ngFor="let notif of notifications()" class="notification-item" [class.unread]="!notif.read">
+      <div class="icon-wrapper">
+        <i class="fas fa-info-circle"></i>
+      </div>
+      <div class="content-wrapper">
+        <p class="notif-title">{{ notif.title }}</p>
+        <p class="notif-message">{{ notif.message }}</p>
+        <p class="notif-date">{{ notif.createdAt | date:'medium' }}</p>
+      </div>
+      <div *ngIf="!notif.read" class="unread-dot"></div>
+    </div>
+  </div>
+</div>

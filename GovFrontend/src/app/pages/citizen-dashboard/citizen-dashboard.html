@@ -1,0 +1,111 @@
+<!-- Loading and Error States -->
+<div *ngIf="loading()" class="loading">Loading dashboard...</div>
+<div *ngIf="error()" class="error">{{ error() }}</div>
+
+<!-- Main Dashboard Content -->
+<div *ngIf="dashboardData() as data" class="page-grid">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="user-info">
+      <div class="avatar">{{ getInitials(data.name) }}</div>
+      <div>
+        <p class="name">{{ data.name }}</p>
+        <p class="role">Citizen</p>
+      </div>
+    </div>
+    <nav class="nav-links">
+      <a routerLink="/citizen-dashboard" class="active">Dashboard</a>
+      <a routerLink="/my-requests">My Requests</a>
+      <a routerLink="/payments">Payments</a>
+      <a routerLink="/help">Help Center</a>
+    </nav>
+  </aside>
+
+  <!-- Main Content Area -->
+  <main class="main-content">
+    <!-- Header with Welcome Message and Search Bar -->
+    <header class="header">
+      <div>
+        <h1>Welcome, {{ data.name }}</h1>
+        <p>Access government services quickly and efficiently</p>
+      </div>
+      <div class="search">
+        <i class="fas fa-search"></i>
+        <input
+          type="text"
+          placeholder="Search services..."
+          [(ngModel)]="searchQuery"
+          (input)="filterCategories()"
+        />
+      </div>
+    </header>
+
+    <!-- Stats Section -->
+    <section class="stats">
+      <div class="stat-card" *ngFor="let s of data.stats">
+        <div class="icon" [ngClass]="s.colorClass">
+          <i class="{{ s.icon }}"></i>
+        </div>
+        <div>
+          <p class="label">{{ s.label }}</p>
+          <p class="count">{{ s.count }}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Service Categories Section -->
+    <section class="categories">
+      <a *ngFor="let category of filteredCategories()" class="category-card" [routerLink]="['/' + category.id + '-services']">
+        <div class="category-header">
+          <i class="{{ category.icon }}"></i>
+          <h3>{{ category.name }}</h3>
+        </div>
+        <p>{{ category.description }}</p>
+        <div class="tags">
+          <span *ngFor="let tag of category.tags">{{ tag }}</span>
+        </div>
+      </a>
+    </section>
+
+    <!-- Recent Requests Section -->
+    <section class="recent-requests">
+      <div class="requests-header">
+        <h3>Recent Requests</h3>
+        <!-- ✅ This button now links to the requests page -->
+        <a routerLink="/my-requests" class="btn-link">View All</a>
+      </div>
+      <table class="requests-table">
+        <thead>
+        <tr>
+          <th>Service</th>
+          <th>Date</th>
+          <th>Status</th>
+          <!-- ✅ Added missing table header for actions -->
+          <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let r of data.recentRequests">
+          <td>{{ r.service }}</td>
+          <td>{{ r.date | date: 'mediumDate' }}</td>
+          <td><span class="status-badge" [ngClass]="r.statusClass">{{ r.status }}</span></td>
+          <td><a class="btn-link">Track</a></td>
+        </tr>
+        <tr *ngIf="data.recentRequests.length === 0">
+          <td colspan="4" style="text-align: center; padding: 1rem;">No recent requests found.</td>
+        </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Quick Actions Section -->
+    <section class="quick-actions">
+      <h3>Quick Actions</h3>
+      <div class="actions-container">
+        <button class="btn-primary"  routerLink="/payments"><i class="fas fa-credit-card"></i> Make a Payment</button>
+        <button class="btn-secondary" routerLink="/traffic-services"><i class="fas fa-car"></i> Traffic Services</button>
+        <button class="btn-secondary" routerLink="/municipality-services"><i class="fas fa-city"></i> Municipality Services</button>
+      </div>
+    </section>
+  </main>
+</div>

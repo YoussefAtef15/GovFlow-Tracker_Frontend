@@ -1,0 +1,176 @@
+/* =================================
+   Modern My Requests Styles
+   ================================= */
+:host {
+  font-family: 'Cairo', sans-serif;
+  background-color: #F5F7FA;
+  display: block;
+}
+
+.page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+.page-header {
+  margin-bottom: 2rem;
+}
+.page-header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2D4059;
+}
+.page-header p {
+  color: #6B7B9B;
+  margin-top: 0.5rem;
+  font-size: 1rem;
+}
+
+.content-card {
+  background: #FFFFFF;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
+}
+
+.filters {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #E5E7EB;
+  padding-bottom: 2rem;
+}
+.filters label {
+  font-weight: 600;
+  color: #2D4059;
+}
+.filters select {
+  padding: 0.7rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #D1D5DB;
+  background-color: #F5F7FA;
+  transition: all 0.2s ease;
+}
+.filters select:focus {
+  outline: none;
+  border-color: #3A4A7B;
+  box-shadow: 0 0 0 3px rgba(58, 74, 123, 0.2);
+}
+
+.requests-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.request-card {
+  border: 1px solid #E5E7EB;
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: box-shadow 0.2s ease;
+}
+.request-card:hover {
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.request-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+.service-name { font-size: 1.25rem; font-weight: 600; color: #2D4059; }
+.request-id, .submitted-date { font-size: 0.875rem; color: #6B7B9B; margin-top: 0.25rem; }
+.status-badge {
+  padding: 0.3rem 0.8rem;
+  border-radius: 99px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+.status-under-review { background-color: #fff9db; color: #e8590c; }
+.status-approved { background-color: #e6fcf5; color: #2b8a3e; }
+.status-in-progress { background-color: #e7f5ff; color: #1864ab; }
+.status-rejected { background-color: #fff5f5; color: #c92a2a; }
+
+.progress-bar-container {
+  background-color: #E5E7EB;
+  border-radius: 99px;
+  height: 0.5rem;
+  margin-bottom: 0.5rem;
+  overflow: hidden;
+}
+.progress-bar { background-color: #3A4A7B; height: 100%; border-radius: 99px; }
+.progress-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: #6B7B9B;
+  margin-bottom: 1.5rem;
+}
+
+.employee-comments {
+  background: #F5F7FA;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid #E5E7EB;
+}
+.employee-comments h4 { font-weight: 600; color: #2D4059; margin-bottom: 0.5rem; }
+.employee-comments p { color: #6B7B9B; margin: 0; }
+
+.documents-section { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.document-list h4, .upload-box h4 { font-size: 1rem; font-weight: 600; color: #2D4059; margin-bottom: 1rem;}
+.document-list ul { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.75rem; }
+.document-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #F5F7FA;
+  padding: 0.75rem;
+  border-radius: 8px;
+}
+.document-list i { margin-right: 0.75rem; color: #FF5722; font-size: 1.25rem; }
+.document-list li .fa-file-image { color: #3A4A7B; }
+
+.upload-box {
+  border: 2px dashed #D1D5DB;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  text-align: center;
+  color: #6B7B9B;
+  transition: border-color 0.2s ease;
+}
+.upload-box:hover { border-color: #3A4A7B; }
+.upload-box i { font-size: 1.75rem; margin-bottom: 0.75rem; color: #9ca3af; }
+.upload-box p { font-size: 0.9rem; margin: 0;}
+
+.btn-primary, .btn-link {
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+.btn-primary {
+  background-color: #FF5722;
+  color: white;
+  padding: 0.7rem 1.5rem;
+  margin-top: 1rem;
+}
+.btn-primary:hover { background-color: #E64A19; transform: translateY(-2px); box-shadow: 0 4px 10px rgba(255, 87, 34, 0.3); }
+.btn-link { background: none; color: #3A4A7B; margin-left: 0.5rem; }
+.btn-link:hover { color: #FF5722; text-decoration: underline; }
+
+.loading-state, .error-state, .no-results { text-align: center; padding: 3rem; color: #6B7B9B; }
+.error-state { color: #c92a2a; }
+
+@media (max-width: 768px) {
+  .documents-section { grid-template-columns: 1fr; }
+}

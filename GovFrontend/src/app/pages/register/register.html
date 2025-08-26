@@ -1,0 +1,105 @@
+<div class="register-card">
+  <div class="register-header">
+    <i class="fas fa-user-plus register-icon"></i>
+    <h1 class="register-title">Register</h1>
+    <p class="register-subtitle">Create your account</p>
+  </div>
+
+  <form #registerForm="ngForm" (ngSubmit)="register()" class="register-form">
+
+    <!-- Full Name -->
+    <div class="form-group">
+      <label for="fullName" class="form-label">Full Name</label>
+      <input
+        type="text"
+        id="fullName"
+        name="fullName"
+        [(ngModel)]="fullName"
+        required
+        pattern="^(\S+\s+){3,}\S+$"
+        #fullNameInput="ngModel"
+        class="form-input"
+        placeholder="Enter your full name (4 words)">
+
+      <div *ngIf="fullNameInput.invalid && (fullNameInput.dirty || fullNameInput.touched)" class="form-error">
+        Full name must contain at least 4 words.
+      </div>
+    </div>
+
+    <!-- National ID -->
+    <div class="form-group">
+      <label for="nationalId" class="form-label">National ID</label>
+      <input type="text" id="nationalId" name="nationalId" [(ngModel)]="nationalId" required pattern="^[0-9]{14}$" #nationalIdInput="ngModel" class="form-input" placeholder="Enter your 14-digit National ID">
+      <div *ngIf="nationalIdInput.invalid && (nationalIdInput.dirty || nationalIdInput.touched)" class="form-error">
+        Please enter a valid 14-digit National ID.
+      </div>
+    </div>
+
+    <!-- Phone Number -->
+    <div class="form-group">
+      <label for="phoneNumber" class="form-label">Phone Number</label>
+      <input type="tel" id="phoneNumber" name="phoneNumber" [(ngModel)]="phoneNumber" required pattern="^[0-9]{11}$" #phoneInput="ngModel" class="form-input" placeholder="Enter your 11-digit phone number">
+      <div *ngIf="phoneInput.invalid && (phoneInput.dirty || phoneInput.touched)" class="form-error">
+        Please enter a valid 11-digit phone number.
+      </div>
+    </div>
+
+    <!-- Address -->
+    <div class="form-group">
+      <label for="address" class="form-label">Address</label>
+      <input type="text" id="address" name="address" [(ngModel)]="address" required #addressInput="ngModel" class="form-input" placeholder="Enter your address">
+      <div *ngIf="addressInput.invalid && (addressInput.dirty || addressInput.touched)" class="form-error">
+        Address is required.
+      </div>
+    </div>
+
+    <!-- Email -->
+    <div class="form-group">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" id="email" name="email" [(ngModel)]="email" required email #emailInput="ngModel" class="form-input" placeholder="Enter your email">
+      <div *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)" class="form-error">
+        Please enter a valid email address.
+      </div>
+    </div>
+
+    <!-- Password -->
+    <div class="form-group">
+      <label for="password" class="form-label">Password</label>
+      <input type="password" id="password" name="password" [(ngModel)]="password" required minlength="8" #passwordInput="ngModel" class="form-input" placeholder="Enter your password">
+      <div *ngIf="passwordInput.invalid && (passwordInput.dirty || passwordInput.touched)" class="form-error">
+        Password must be at least 8 characters long.
+      </div>
+    </div>
+
+    <!-- Confirm Password -->
+    <div class="form-group">
+      <label for="confirmPassword" class="form-label">Confirm Password</label>
+      <input type="password" id="confirmPassword" name="confirmPassword" [(ngModel)]="confirmPassword" required #confirmPasswordInput="ngModel" class="form-input" placeholder="Confirm your password">
+      <div *ngIf="confirmPasswordInput.invalid && (confirmPasswordInput.dirty || confirmPasswordInput.touched)" class="form-error">
+        Please confirm your password.
+      </div>
+    </div>
+
+    <!-- Role -->
+    <div class="form-group">
+      <label for="roleSelector" class="form-label">Role</label>
+      <select id="roleSelector" [(ngModel)]="role" name="role" (change)="toggleRoleCode()" class="form-select">
+        <option value="citizen">Citizen</option>
+        <option value="employee">Employee</option>
+        <option value="manager">Manager</option>
+      </select>
+    </div>
+
+    <!-- Job Role Code -->
+    <div id="roleCodeField" [class.hidden]="!showRoleCode" class="form-group">
+      <label for="jobRoleCode" class="form-label">Job Role Code</label>
+      <input type="text" id="jobRoleCode" [(ngModel)]="jobRoleCode" name="jobRoleCode" class="form-input" placeholder="Enter your job role code">
+    </div>
+
+    <button type="submit" [disabled]="!registerForm.form.valid" class="register-button">Register</button>
+  </form>
+
+  <div class="register-links">
+    <a routerLink="/login" class="link-action">Already have an account? Login</a>
+  </div>
+</div>

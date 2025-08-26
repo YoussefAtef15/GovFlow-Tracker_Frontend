@@ -1,0 +1,54 @@
+/* =================================
+   Modern Manager Analytics Styles
+   ================================= */
+.analytics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.analytics-card {
+  background-color: #FFFFFF;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
+  padding: 1.5rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.analytics-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #2D4059;
+  margin: 0 0 1.5rem 0;
+}
+
+/* Progress Bar Styles */
+.progress-list { display: flex; flex-direction: column; gap: 1rem; }
+.progress-item { display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem; color: #6B7B9B; }
+.progress-bar-container { flex-grow: 1; height: 0.5rem; background-color: #F5F7FA; border-radius: 9999px; margin: 0 1rem; overflow: hidden; }
+.progress-bar { height: 100%; border-radius: 9999px; }
+.progress-bar.blue { background-color: #3A4A7B; }
+.progress-bar.green { background-color: #28a745; }
+.progress-bar.yellow { background-color: #FF9A6C; }
+.progress-value { font-weight: 600; color: #2D4059; }
+
+/* Rate Summary Styles */
+.rate-summary { text-align: center; }
+.rate-percentage { font-size: 2.5rem; font-weight: 700; margin: 0 0 0.25rem 0; color: #16a34a; }
+.rate-percentage.blue-text { color: #3A4A7B; }
+.rate-subtitle { color: #6B7B9B; font-size: 0.9rem; margin: 0; }
+.rate-details { margin-top: 1rem; display: flex; flex-direction: column; gap: 0.75rem; }
+.rate-item { display: flex; justify-content: space-between; font-size: 0.9rem; color: #6B7B9B; }
+.rate-item span:last-child { font-weight: 600; color: #2D4059; }
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+  .analytics-grid {
+    grid-template-columns: 1fr;
+  }
+}

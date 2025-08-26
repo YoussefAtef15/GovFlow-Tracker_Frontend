@@ -1,0 +1,211 @@
+<div class="employee-dashboard">
+  <div class="dashboard-container">
+    <div class="dashboard-layout">
+      <!-- =================================== -->
+      <!--          الشريط الجانبي (Sidebar)         -->
+      <!-- =================================== -->
+      <div class="sidebar">
+        <div class="employee-info">
+          <div class="avatar">{{ employee.initial }}</div>
+          <div>
+            <p class="employee-name">{{ employee.name }}</p>
+            <p class="employee-department">{{ employee.department }}</p>
+          </div>
+        </div>
+
+        <nav class="sidebar-nav">
+          <a routerLink="/employee-dashboard" class="nav-item">
+            <i class="fas fa-tachometer-alt nav-icon"></i>
+            Dashboard
+          </a>
+          <!-- تم تفعيل هذا الرابط -->
+          <a routerLink="/employee-tasks" class="nav-item active">
+            <i class="fas fa-tasks nav-icon"></i>
+            My Tasks
+          </a>
+          <a routerLink="/profile" class="nav-item">
+            <i class="fas fa-user nav-icon"></i>
+            Profile
+          </a>
+          <a routerLink="/help" class="nav-item">
+            <i class="fas fa-question-circle nav-icon"></i>
+            Help Center
+          </a>
+        </nav>
+      </div>
+
+      <!-- =================================== -->
+      <!--         المحتوى الرئيسي (Main Content)      -->
+      <!-- =================================== -->
+      <div class="main-content">
+        <div class="dashboard-header">
+          <h1 class="dashboard-title">My Tasks</h1>
+          <p class="dashboard-subtitle">Review and manage your assigned tasks</p>
+        </div>
+
+        <!-- جدول المهام -->
+        <div class="requests-table">
+          <div class="table-header">
+            <h3 class="table-title">Assigned Tasks</h3>
+            <div class="table-filters">
+              <!-- فلتر البحث -->
+              <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input
+                  type="text"
+                  class="search-input"
+                  placeholder="Search by citizen or service..."
+                  [(ngModel)]="searchTerm"
+                  (input)="applyFilters()">
+              </div>
+              <!-- فلتر حسب الحالة -->
+              <select
+                class="filter-select"
+                [(ngModel)]="statusFilter"
+                (change)="applyFilters()">
+                <option value="all">All Statuses</option>
+                <option value="new">New</option>
+                <option value="in-progress">In Progress</option>
+                <option value="completed">Completed</option>
+              </select>
+              <!-- فلتر حسب الأولوية -->
+              <select
+                class="filter-select"
+                [(ngModel)]="priorityFilter"
+                (change)="applyFilters()">
+                <option value="all">All Priorities</option>
+                <option value="high">High</option>
+                <option value="normal">Normal</option>
+                <option value="low">Low</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- حاوية الجدول -->
+          <div class="table-container">
+            <table>
+              <thead>
+              <tr>
+                <th>Task ID</th>
+                <th>Citizen</th>
+                <th>Service</th>
+                <th>Due Date</th>
+                <th>Priority</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let task of filteredTasks">
+                <td>{{ task.id }}</td>
+                <td>{{ task.citizenName }}</td>
+                <td>{{ task.serviceType }}</td>
+                <td>{{ task.dueDate | date:'MMM d, y' }}</td>
+                <td>
+                    <span
+                      class="priority-badge"
+                      [class.priority-high]="task.priority === 'high'"
+                      [class.priority-normal]="task.priority === 'normal'"
+                      [class.priority-low]="task.priority === 'low'">
+                      {{ task.priority }}
+                    </span>
+                </td>
+                <td>
+                     <span
+                       class="status-badge"
+                       [class.status-new]="task.status === 'new'"
+                       [class.status-in-progress]="task.status === 'in-progress'"
+                       [class.status-completed]="task.status === 'completed'">
+                      {{ task.status }}
+                    </span>
+                </td>
+                <td>
+                  <div class="action-buttons">
+                    <button class="action-btn view-btn" (click)="viewTaskDetails(task.id)">
+                      Details
+                    </button>
+                    <button class="action-btn approve-btn" (click)="markAsComplete(task.id)">
+                      Complete
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <!-- رسالة في حالة عدم وجود نتائج -->
+              <tr *ngIf="filteredTasks.length === 0">
+                <td colspan="7" class="no-results">No tasks found matching your criteria.</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- =================================== -->
+<!--      نافذة منبثقة (Modal) لعرض التفاصيل      -->
+<!-- =================================== -->
+<div class="modal-overlay" *ngIf="isModalVisible" (click)="closeModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <!-- رأس النافذة -->
+    <div class="modal-header">
+      <h2 class="modal-title">Task Details ({{ selectedTask?.id }})</h2>
+      <button class="modal-close-btn" (click)="closeModal()">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+
+    <!-- جسم النافذة -->
+    <div class="modal-body" *ngIf="selectedTask">
+      <div class="detail-grid">
+        <div class="detail-item">
+          <span class="detail-label">Citizen Name</span>
+          <span class="detail-value">{{ selectedTask.citizenName }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Service Type</span>
+          <span class="detail-value">{{ selectedTask.serviceType }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Submitted Date</span>
+          <span class="detail-value">{{ selectedTask.submittedDate | date:'fullDate' }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Due Date</span>
+          <span class="detail-value">{{ selectedTask.dueDate | date:'fullDate' }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Priority</span>
+          <span class="detail-value">
+             <span
+               class="priority-badge"
+               [class.priority-high]="selectedTask.priority === 'high'"
+               [class.priority-normal]="selectedTask.priority === 'normal'"
+               [class.priority-low]="selectedTask.priority === 'low'">
+               {{ selectedTask.priority }}
+             </span>
+          </span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Status</span>
+          <span class="detail-value">
+             <span
+               class="status-badge"
+               [class.status-new]="selectedTask.status === 'new'"
+               [class.status-in-progress]="selectedTask.status === 'in-progress'"
+               [class.status-completed]="selectedTask.status === 'completed'">
+               {{ selectedTask.status }}
+             </span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ذيل النافذة -->
+    <div class="modal-footer">
+      <button class="btn btn-secondary" (click)="closeModal()">Close</button>
+      <button class="btn btn-primary" (click)="markAsComplete(selectedTask!.id); closeModal();">Mark as Complete</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,68 @@
+/* =================================
+   Modern Employee Performance Styles
+   ================================= */
+.performance-card {
+  background-color: #FFFFFF;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
+  padding: 2rem;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #F5F7FA;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #2D4059;
+}
+
+.filters { display: flex; gap: 1rem; }
+.filter-select {
+  padding: 0.7rem 1rem;
+  border: 1px solid #D1D5DB;
+  border-radius: 8px;
+  background-color: #F5F7FA;
+  transition: all 0.2s ease;
+}
+.filter-select:focus {
+  outline: none;
+  border-color: #3A4A7B;
+  box-shadow: 0 0 0 3px rgba(58, 74, 123, 0.2);
+}
+
+.table-wrapper { overflow-x: auto; }
+.performance-table { width: 100%; border-collapse: collapse; }
+.performance-table th {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #6B7B9B;
+  text-transform: uppercase;
+  border-bottom: 2px solid #E5E7EB;
+}
+.performance-table td {
+  padding: 1.25rem 1rem;
+  font-size: 0.95rem;
+  color: #2D4059;
+  border-bottom: 1px solid #F5F7FA;
+}
+.performance-table tbody tr:hover { background-color: #F5F7FA; }
+
+.performance-badge {
+  padding: 0.3rem 0.8rem;
+  border-radius: 99px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+.performance-excellent { background-color: #dcfce7; color: #166534; }
+.performance-good { background-color: #dbeafe; color: #1e40af; }
+.performance-average { background-color: #fef3c7; color: #92400e; }

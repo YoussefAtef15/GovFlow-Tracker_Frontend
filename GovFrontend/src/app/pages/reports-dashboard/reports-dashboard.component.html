@@ -1,0 +1,162 @@
+<div class="reports-container" *ngIf="stats">
+  <nav class="breadcrumb">
+    <ol>
+      <li><a routerLink="/manager-dashboard">Dashboard</a></li>
+      <li><i class="fas fa-chevron-right"></i></li>
+      <li class="active">Reports</li>
+    </ol>
+  </nav>
+
+  <header class="page-header">
+    <div>
+      <h1 class="page-title">Reports Dashboard</h1>
+      <p class="page-subtitle">Analytics and performance metrics across departments</p>
+    </div>
+    <div class="header-actions">
+      <select class="filter-select" [(ngModel)]="selectedPeriod">
+        <option *ngFor="let period of periods">{{ period }}</option>
+      </select>
+      <button class="export-btn">
+        <i class="fas fa-download"></i> Export
+      </button>
+    </div>
+  </header>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-icon-wrapper blue"><i class="fas fa-file-alt stat-icon"></i></div>
+      <div class="stat-info">
+        <p class="stat-label">Total Requests</p>
+        <p class="stat-value">{{ stats.totalRequests.value }}</p>
+        <p *ngIf="stats.totalRequests.change !== undefined" class="stat-change" [ngClass]="getStatChangeClass(stats.totalRequests.change)">
+          <i class="fas" [class.fa-arrow-up]="stats.totalRequests.change >= 0" [class.fa-arrow-down]="stats.totalRequests.change < 0"></i>
+          {{ math.abs(stats.totalRequests.change) }}% from last period
+        </p>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon-wrapper green"><i class="fas fa-check-circle stat-icon"></i></div>
+      <div class="stat-info">
+        <p class="stat-label">Approved</p>
+        <p class="stat-value">{{ stats.approved.value }}</p>
+        <p *ngIf="stats.approved.change !== undefined" class="stat-change" [ngClass]="getStatChangeClass(stats.approved.change)">
+          <i class="fas" [class.fa-arrow-up]="stats.approved.change >= 0" [class.fa-arrow-down]="stats.approved.change < 0"></i>
+          {{ math.abs(stats.approved.change) }}% from last period
+        </p>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon-wrapper red"><i class="fas fa-times-circle stat-icon"></i></div>
+      <div class="stat-info">
+        <p class="stat-label">Rejected</p>
+        <p class="stat-value">{{ stats.rejected.value }}</p>
+        <p *ngIf="stats.rejected.change !== undefined" class="stat-change" [ngClass]="getStatChangeClass(stats.rejected.change)">
+          <i class="fas" [class.fa-arrow-up]="stats.rejected.change >= 0" [class.fa-arrow-down]="stats.rejected.change < 0"></i>
+          {{ math.abs(stats.rejected.change) }}% from last period
+        </p>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon-wrapper yellow"><i class="fas fa-clock stat-icon"></i></div>
+      <div class="stat-info">
+        <p class="stat-label">Avg. Processing Time</p>
+        <p class="stat-value">{{ stats.avgProcessingTime.value }} <span class="days">days</span></p>
+        <p *ngIf="stats.avgProcessingTime.change !== undefined" class="stat-change" [ngClass]="getStatChangeClass(stats.avgProcessingTime.change)">
+          <i class="fas" [class.fa-arrow-down]="stats.avgProcessingTime.change > 0" [class.fa-arrow-up]="stats.avgProcessingTime.change < 0"></i>
+          {{ math.abs(stats.avgProcessingTime.change) }} days improvement
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="charts-grid">
+    <div class="chart-card">
+      <h3 class="card-title">Requests by Department</h3>
+      <div class="chart-placeholder">[Donut Chart Placeholder]</div>
+    </div>
+    <div class="chart-card">
+      <h3 class="card-title">Approval Rate Trend</h3>
+      <div class="chart-placeholder">[Line Chart Placeholder]</div>
+    </div>
+  </div>
+
+  <div class="table-card">
+    <div class="card-header">
+      <h3 class="card-title">Detailed Performance Metrics</h3>
+      <select class="filter-select-small">
+        <option>All Departments</option>
+      </select>
+    </div>
+    <div class="table-wrapper">
+      <table class="metrics-table">
+        <thead>
+        <tr>
+          <th>Department</th>
+          <th>Total Requests</th>
+          <th>Approved</th>
+          <th>Rejected</th>
+          <th>Approval Rate</th>
+          <th>Avg. Time (days)</th>
+          <th>SLA Compliance</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let metric of performanceMetrics">
+          <td>{{ metric.department }}</td>
+          <td>{{ metric.totalRequests }}</td>
+          <td>{{ metric.approved }}</td>
+          <td>{{ metric.rejected }}</td>
+          <td>{{ metric.approvalRate }}</td>
+          <td>{{ metric.avgTime }}</td>
+          <td>{{ metric.slaCompliance }}</td>
+        </tr>
+        </tbody>
+        <tfoot *ngIf="totalMetrics">
+        <tr>
+          <td>{{ totalMetrics.department }}</td>
+          <td>{{ totalMetrics.totalRequests }}</td>
+          <td>{{ totalMetrics.approved }}</td>
+          <td>{{ totalMetrics.rejected }}</td>
+          <td>{{ totalMetrics.approvalRate }}%</td>
+          <td>{{ totalMetrics.avgTime }}</td>
+          <td>{{ totalMetrics.slaCompliance }}%</td>
+        </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+
+  <div *ngIf="topPerformers.length > 0" class="performers-card">
+    <div class="card-header">
+      <h3 class="card-title">Top Performers</h3>
+      <select class="filter-select-small">
+        <option>This Month</option>
+      </select>
+    </div>
+    <div class="performers-grid">
+      <div class="performer" *ngFor="let performer of topPerformers">
+        <div class="performer-header">
+          <div class="performer-initials">{{ performer.initials }}</div>
+          <div>
+            <p class="performer-name">{{ performer.name }}</p>
+            <p class="performer-dept">{{ performer.department }}</p>
+          </div>
+        </div>
+        <div class="performer-stats">
+          <div>
+            <p class="p-stat-value">{{ performer.requestsProcessed }}</p>
+            <p class="p-stat-label">Requests Processed</p>
+          </div>
+          <div>
+            <p class="p-stat-value">{{ performer.approvalRate }}</p>
+            <p class="p-stat-label">Approval Rate</p>
+          </div>
+          <div>
+            <p class="p-stat-value">{{ performer.avgTime }}</p>
+            <p class="p-stat-label">Avg. Time</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

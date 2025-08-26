@@ -1,0 +1,43 @@
+<div class="performance-card">
+  <div class="card-header">
+    <h3 class="card-title">Employee Performance</h3>
+    <div class="filters">
+      <!-- ✅ Bind select elements to component properties -->
+      <select class="filter-select" [(ngModel)]="selectedMonth" (change)="filterData()">
+        <option *ngFor="let month of months" [value]="month">{{ month }}</option>
+      </select>
+      <select class="filter-select" [(ngModel)]="selectedDepartment" (change)="filterData()">
+        <option *ngFor="let dept of departments" [value]="dept">{{ dept }}</option>
+      </select>
+    </div>
+  </div>
+  <div class="table-wrapper">
+    <table class="performance-table">
+      <thead>
+      <tr>
+        <th>Employee</th>
+        <th>Department</th>
+        <th>Processed</th>
+        <th>Avg. Time</th>
+        <th>Approval Rate</th>
+        <th>Performance</th>
+      </tr>
+      </thead>
+      <tbody>
+      <!-- ✅ Loop over filteredEmployees -->
+      <tr *ngFor="let employee of filteredEmployees">
+        <td>{{employee.name}}</td>
+        <td>{{employee.department}}</td>
+        <td>{{employee.processed}}</td>
+        <td>{{employee.avgTime}}</td>
+        <td>{{employee.approvalRate}}</td>
+        <td>
+            <span class="performance-badge" [ngClass]="getPerformanceClass(employee.performance)">
+              {{employee.performance}}
+            </span>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

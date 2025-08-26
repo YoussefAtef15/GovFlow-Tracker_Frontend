@@ -1,0 +1,15 @@
+<div class="alerts-card">
+  <div class="card-header">
+    <h3 class="card-title">System Alerts</h3>
+    <button class="link-button">Mark All as Read</button>
+  </div>
+  <div class="alerts-list">
+    <div *ngFor="let alert of alerts" class="alert-item" [ngClass]="alert.type">
+      <i class="fas {{alert.icon}} alert-icon"></i>
+      <div>
+        <p class="alert-title">{{alert.title}}</p>
+        <p class="alert-description">{{alert.description}}</p>
+      </div>
+    </div>
+  </div>
+</div>

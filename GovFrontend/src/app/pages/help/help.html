@@ -1,0 +1,26 @@
+<div class="help-card">
+  <h1 class="help-title">Help Center</h1>
+  <p class="help-subtitle">Find answers to frequently asked questions</p>
+
+  <div class="help-controls">
+    <input type="text" placeholder="Search FAQs..." [(ngModel)]="searchTerm" class="help-search">
+    <select [(ngModel)]="selectedCategory" class="help-filter">
+      <option value="all">All Categories</option>
+      <option value="Account">Account</option>
+      <option value="Services">Services</option>
+      <option value="Support">Support</option>
+    </select>
+  </div>
+
+  <div class="faq-list">
+    <div *ngFor="let faq of filteredFaqs" class="faq-item">
+      <div class="faq-question-wrapper" (click)="toggleAccordion(faq)">
+        <h3 class="faq-question">{{ faq.question }}</h3>
+        <span class="faq-toggle">{{ faq.open ? '-' : '+' }}</span>
+      </div>
+      <div *ngIf="faq.open" class="faq-answer">{{ faq.answer }}</div>
+      <span class="faq-category">{{ faq.category }}</span>
+    </div>
+    <p *ngIf="filteredFaqs.length === 0" class="no-results">No FAQs found.</p>
+  </div>
+</div>

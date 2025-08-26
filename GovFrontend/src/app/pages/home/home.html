@@ -1,0 +1,104 @@
+<div id="home" class="home-wrapper">
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>GovFlow: Government Services Made Easy</h1>
+      <p>Access all government services in one place - fast, secure, and convenient</p>
+
+      <div class="hero-buttons" *ngIf="!isLoggedIn">
+        <button routerLink="/login" class="btn-primary">
+          <i class="fas fa-sign-in-alt"></i> Login
+        </button>
+        <button routerLink="/register" class="btn-outline">
+          <i class="fas fa-user-plus"></i> Register
+        </button>
+      </div>
+
+      <div class="hero-buttons" *ngIf="isLoggedIn">
+        <div class="welcome-message">
+          <p>Welcome back, <strong>{{ userName }}</strong>!</p>
+        </div>
+        <button (click)="navigateToDashboard()" class="btn-primary">
+          <i class="fas fa-tachometer-alt"></i> Dashboard
+        </button>
+        <button (click)="logout()" class="btn-outline">
+          <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="services">
+    <h2>Our Services</h2>
+    <div id="services" class="service-cards">
+
+      <!-- Traffic Department -->
+      <div class="cards-container">
+
+        <!-- Traffic Department -->
+        <div class="card">
+          <div class="card-header blue-bg">
+            <i class="fas fa-car"></i>
+            <h3>Traffic Department</h3>
+          </div>
+          <div class="card-body">
+            <p>Manage all your traffic-related services including licenses, violations, and vehicle registrations</p>
+            <ul>
+              <li><i class="fas fa-check"></i> Driver's license issuance and renewal</li>
+              <li><i class="fas fa-check"></i> License replacement for lost/damaged cards</li>
+              <li><i class="fas fa-check"></i> View and pay traffic violations</li>
+              <li><i class="fas fa-check"></i> Vehicle registration services</li>
+            </ul>
+            <button routerLink="/traffic-services" class="btn blue-btn">Explore Traffic Services</button>
+          </div>
+        </div>
+
+        <!-- Local Municipality -->
+        <div class="card">
+          <div class="card-header green-bg">
+            <i class="fas fa-city"></i>
+            <h3>Local Municipality</h3>
+          </div>
+          <div class="card-body">
+            <p>Access municipal services including building permits, complaints, and local regulations</p>
+            <ul>
+              <li><i class="fas fa-check"></i> Building permit issuance and renewal</li>
+              <li><i class="fas fa-check"></i> Report building violations</li>
+              <li><i class="fas fa-check"></i> Submit cleanliness complaints</li>
+              <li><i class="fas fa-check"></i> Request renovation permits</li>
+            </ul>
+            <button routerLink="/municipality-services" class="btn green-btn">Explore Municipal Services</button>
+          </div>
+        </div>
+
+      </div>
+
+
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features">
+    <h2>Why Choose GovFlow Tracker?</h2>
+    <div class="feature-cards">
+      <div class="feature">
+        <div class="icon blue"><i class="fas fa-clock"></i></div>
+        <h3>Save Time</h3>
+        <p>Complete government procedures in minutes instead of days with our streamlined digital services</p>
+      </div>
+      <div class="feature">
+        <div class="icon green"><i class="fas fa-mobile-alt"></i></div>
+        <h3>Anywhere Access</h3>
+        <p>Access services 24/7 from any device without visiting government offices</p>
+      </div>
+      <div class="feature">
+        <div class="icon yellow"><i class="fas fa-shield-alt"></i></div>
+        <h3>Secure & Private</h3>
+        <p>Your data is protected with enterprise-grade security and encryption</p>
+      </div>
+    </div>
+  </section>
+
+</div>

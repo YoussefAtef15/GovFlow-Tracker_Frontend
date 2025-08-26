@@ -1,0 +1,113 @@
+<div class="page">
+  <nav class="breadcrumb-nav">
+    <ol class="breadcrumb-list">
+      <li>
+        <a routerLink="/citizen-dashboard" class="breadcrumb-link">Dashboard</a>
+      </li>
+      <li class="breadcrumb-separator">
+        <i class="fas fa-chevron-right"></i>
+      </li>
+      <li>
+        <a routerLink="/traffic-services" class="breadcrumb-link">Traffic Services</a>
+      </li>
+      <li class="breadcrumb-separator">
+        <i class="fas fa-chevron-right"></i>
+      </li>
+      <li class="breadcrumb-item active">Apply for Service</li>
+    </ol>
+  </nav>
+
+  <div class="form-container">
+    <div class="form-header">
+      <h1 class="form-title">{{ serviceInfo.title }}</h1>
+      <p class="form-description">{{ serviceInfo.description }}</p>
+      <div class="documents-container">
+        <h3 class="documents-title">Required Documents:</h3>
+        <ul class="documents-list">
+          <li *ngFor="let doc of serviceInfo.requiredDocuments" class="document-item">
+            • {{ doc }}
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <form [formGroup]="licenseForm" (ngSubmit)="submitRequest()" class="service-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Full Name</label>
+          <input type="text" formControlName="fullName" readonly class="form-input readonly-input">
+        </div>
+        <div class="form-group">
+          <label class="form-label">National ID</label>
+          <input type="text" formControlName="nationalId" readonly class="form-input readonly-input">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Current License Number</label>
+          <input type="text" formControlName="licenseNumber" class="form-input" placeholder="Enter your license number" [class.invalid]="licenseNumberControl?.invalid && licenseNumberControl?.touched">
+          <div *ngIf="licenseNumberControl?.invalid && licenseNumberControl?.touched" class="error-message">
+            <span *ngIf="licenseNumberControl?.errors?.['required']">License number is required</span>
+            <span *ngIf="licenseNumberControl?.errors?.['pattern']">Please enter a valid license number</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">License Category</label>
+          <select formControlName="licenseCategory" class="form-select">
+            <option *ngFor="let category of licenseCategories" [value]="category">
+              {{ category }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Document Attachments</label>
+        <div class="upload-area" (click)="fileInput.click()" (drop)="onFileDrop($event)" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)" [class.drag-over]="isDragOver">
+          <i class="fas fa-cloud-upload-alt upload-icon"></i>
+          <p class="upload-text">Drag and drop files here or click to browse</p>
+          <input #fileInput type="file" multiple (change)="onFileSelected($event)" class="file-input">
+          <button type="button" class="upload-button">
+            Choose Files
+          </button>
+        </div>
+        <div *ngIf="uploadedFiles.length > 0" class="uploaded-files">
+          <p class="uploaded-files-title">Selected files:</p>
+          <div *ngFor="let file of uploadedFiles; let i = index" class="file-item">
+            <span class="file-name">{{ file.name }}</span>
+            <button type="button" (click)="removeFile(i)" class="remove-file-button">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="processing-info">
+        <p class="processing-text"><i class="fas fa-clock"></i> Estimated processing time: {{ serviceInfo.processingTime }}</p>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" [disabled]="licenseForm.invalid || isLoading || uploadedFiles.length === 0" class="submit-button">
+          <i class="fas fa-paper-plane"></i>
+          {{ isLoading ? 'Submitting...' : 'Submit Request' }}
+        </button>
+        <button type="button" (click)="cancel()" class="cancel-button">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="modal-backdrop" *ngIf="isAlertVisible" (click)="hideAlert()">
+  <div class="modal-content" (click)="$event.stopPropagation()" [ngClass]="alertType">
+    <div class="icon-wrapper">
+      <i *ngIf="alertType === 'success'" class="fas fa-check-circle"></i>
+      <i *ngIf="alertType === 'error'" class="fas fa-times-circle"></i>
+    </div>
+    <h2 class="modal-title">{{ alertTitle }}</h2>
+    <p class="modal-message">{{ alertMessage }}</p>
+    <button class="modal-button" (click)="hideAlert()">Close</button>
+  </div>
+</div>

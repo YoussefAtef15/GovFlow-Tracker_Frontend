@@ -1,0 +1,283 @@
+/*!* Original Styles *!*/
+/*!* ===== Card ===== *!*/
+/*.register-card {*/
+/*  background-color: #ffffff;*/
+/*  border-radius: 0.5rem;*/
+/*  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);*/
+/*  padding: 2rem;*/
+/*  max-width: 32rem;*/
+/*  margin: 3rem auto 0;*/
+/*}*/
+
+/*!* ===== Header ===== *!*/
+/*.register-header {*/
+/*  text-align: center;*/
+/*  margin-bottom: 2rem;*/
+/*}*/
+/*.register-icon {*/
+/*  font-size: 2.5rem;*/
+/*  color:  #058cc4;*/
+/*  margin-bottom: 1rem;*/
+/*}*/
+/*.register-title {*/
+/*  font-size: 1.5rem;*/
+/*  font-weight: 700;*/
+/*  color: #111827;*/
+/*}*/
+/*.register-subtitle {*/
+/*  color: #4B5563;*/
+/*  margin-top: 0.5rem;*/
+/*}*/
+
+/*!* ===== Form ===== *!*/
+/*.register-form {*/
+/*  display: flex;*/
+/*  flex-direction: column;*/
+/*  gap: 1.25rem;*/
+/*}*/
+/*.form-group {*/
+/*  display: flex;*/
+/*  flex-direction: column;*/
+/*}*/
+/*.form-label {*/
+/*  font-size: 0.875rem;*/
+/*  color: #374151;*/
+/*  margin-bottom: 0.5rem;*/
+/*}*/
+/*.form-input, .form-select {*/
+/*  width: 100%;*/
+/*  padding: 8px 12px;*/
+/*  border: 1px solid #d1d5db;*/
+/*  border-radius: 6px;*/
+/*  font-size: 14px;*/
+/*  box-sizing: border-box;*/
+/*  transition: border-color 0.2s ease, box-shadow 0.2s ease;*/
+/*}*/
+/*.form-input:focus, .form-select:focus {*/
+/*  border-color:  #058cc4;*/
+/*  box-shadow: 0 0 0 2px rgba(5, 140, 196, 0.3);*/
+/*}*/
+/*.form-error {*/
+/*  font-size: 0.75rem;*/
+/*  color: #EF4444;*/
+/*  margin-top: 0.25rem;*/
+/*  display: block;*/
+/*}*/
+
+/*!* ============================================= *!*/
+/*!* ===== Professional Phone Input Group ===== *!*/
+/*!* ============================================= *!*/
+/*.phone-input-group {*/
+/*  display: flex;*/
+/*  align-items: center;*/
+/*  border: 1px solid #d1d5db;*/
+/*  border-radius: 6px;*/
+/*  transition: border-color 0.2s ease, box-shadow 0.2s ease;*/
+/*}*/
+/*!* تأثير التركيز على الحاوية بأكملها *!*/
+/*.phone-input-group:focus-within {*/
+/*  border-color: #058cc4;*/
+/*  box-shadow: 0 0 0 2px rgba(5, 140, 196, 0.3);*/
+/*}*/
+
+/*.country-code-select {*/
+/*  flex-shrink: 0;*/
+/*  padding: 8px 12px;*/
+/*  background-color: #f9fafb;*/
+/*  border: none;*/
+/*  border-right: 1px solid #d1d5db; !* الفاصل الرأسي *!*/
+/*  border-radius: 6px 0 0 6px; !* حواف دائرية على اليسار فقط *!*/
+/*  font-size: 14px;*/
+/*  cursor: pointer;*/
+/*  outline: none;*/
+/*}*/
+
+/*.phone-number-input {*/
+/*  flex-grow: 1;*/
+/*  border: none; !* إزالة الإطار الداخلي *!*/
+/*  outline: none; !* إزالة الخط الخارجي عند التركيز *!*/
+/*  padding: 8px 12px;*/
+/*  border-radius: 0 6px 6px 0; !* حواف دائرية على اليمين فقط *!*/
+/*}*/
+
+
+/*!* ===== Button ===== *!*/
+/*.register-button {*/
+/*  display: flex;*/
+/*  justify-content: center;*/
+/*  align-items: center;*/
+/*  background-color:  #058cc4;*/
+/*  color: #ffffff;*/
+/*  padding: 0.75rem 1rem;*/
+/*  border-radius: 0.375rem;*/
+/*  border: none;*/
+/*  cursor: pointer;*/
+/*  transition: all 0.2s;*/
+/*  font-weight: 500;*/
+/*  margin-top: 1rem;*/
+/*}*/
+/*.register-button:hover:not(:disabled) {*/
+/*  background-color:  #04749b;*/
+/*}*/
+/*.register-button:disabled {*/
+/*  background-color: #9CA3AF;*/
+/*  cursor: not-allowed;*/
+/*}*/
+
+/*!* ===== Links ===== *!*/
+/*.register-links {*/
+/*  text-align: center;*/
+/*  margin-top: 1.5rem;*/
+/*}*/
+/*.link-action {*/
+/*  color:  #058cc4;*/
+/*  font-size: 0.875rem;*/
+/*  text-decoration: none;*/
+/*}*/
+/*.link-action:hover {*/
+/*  text-decoration: underline;*/
+/*}*/
+
+/*!* ===== Hidden Class ===== *!*/
+/*.hidden {*/
+/*  display: none;*/
+/*}*/
+
+/*!* Responsive Styles *!*/
+/*@media (max-width: 480px) {*/
+/*  .register-card {*/
+/*    margin: 1.5rem 1rem;*/
+/*    padding: 1.5rem;*/
+/*  }*/
+/*}*/
+
+
+/* =================================
+   Modern Register Card Styles
+   ================================= */
+
+/* ===== Card ===== */
+.register-card {
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  padding: 2.5rem;
+  max-width: 550px; /* Slightly wider to accommodate more fields */
+  width: 100%;
+  margin: 3rem auto 0; /* Keeps the card in its original layout position */
+  border-top: 5px solid #3A4A7B; /* Primary color accent */
+  font-family: 'Cairo', sans-serif; /* Recommended modern font */
+}
+
+/* ===== Header ===== */
+.register-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.register-icon {
+  font-size: 3rem;
+  color: #3A4A7B;
+  margin-bottom: 1rem;
+}
+.register-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #2D4059;
+}
+.register-subtitle {
+  color: #6B7B9B;
+  margin-top: 0.5rem;
+}
+
+/* ===== Form ===== */
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* Slightly smaller gap for more fields */
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+.form-label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #3A4A7B;
+  margin-bottom: 0.5rem;
+}
+.form-input, .form-select {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1px solid #D1D5DB;
+  border-radius: 8px;
+  outline: none;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+  background-color: #F5F7FA;
+}
+.form-input:focus, .form-select:focus {
+  border-color: #3A4A7B;
+  box-shadow: 0 0 0 3px rgba(58, 74, 123, 0.2);
+  background-color: #FFFFFF;
+}
+.form-error {
+  font-size: 0.8rem;
+  color: #EF4444;
+  margin-top: 0.25rem;
+  display: block;
+}
+
+/* ===== Button ===== */
+.register-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #FF5722; /* Accent color */
+  color: #ffffff;
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  font-size: 1rem;
+  margin-top: 1.5rem;
+}
+.register-button:hover:not(:disabled) {
+  background-color: #E64A19; /* Darker accent on hover */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(255, 87, 34, 0.3);
+}
+.register-button:disabled {
+  background-color: #9CA3AF;
+  cursor: not-allowed;
+}
+
+/* ===== Links ===== */
+.register-links {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+}
+.link-action {
+  color: #3A4A7B;
+  text-decoration: none;
+  font-weight: 500;
+}
+.link-action:hover {
+  color: #FF5722;
+  text-decoration: underline;
+}
+
+/* ===== Hidden Class (for job role code) ===== */
+.hidden {
+  display: none;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 600px) {
+  .register-card {
+    margin: 1.5rem 1rem;
+    padding: 2rem 1.5rem;
+  }
+}

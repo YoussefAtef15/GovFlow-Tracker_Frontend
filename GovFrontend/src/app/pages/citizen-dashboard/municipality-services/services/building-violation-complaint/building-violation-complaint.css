@@ -1,0 +1,351 @@
+/* =================================
+   MODIFIED: Modern Styles Applied to Original CSS Structure
+   ================================= */
+
+/* General Styles */
+.page {
+  padding: 2rem; /* UPDATED: Increased padding */
+  font-family: 'Cairo', sans-serif; /* UPDATED: Modern Font */
+  background-color: #F5F7FA; /* UPDATED: Theme background color */
+  animation: fadeIn 0.5s ease-out; /* ADDED: Fade-in animation */
+}
+
+.hidden {
+  display: none;
+}
+
+/* Breadcrumb Navigation */
+.breadcrumb-nav {
+  margin-bottom: 1.5rem; /* UPDATED: Consistent margin */
+}
+.breadcrumb-list {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: 0.75rem; /* UPDATED: Consistent gap */
+}
+.breadcrumb-link {
+  color: #3A4A7B; /* UPDATED: Theme color */
+  text-decoration: none;
+  font-size: 0.9rem; /* UPDATED: Consistent font size */
+  font-weight: 500;
+  cursor: pointer;
+}
+.breadcrumb-link:hover {
+  text-decoration: underline;
+}
+.breadcrumb-separator {
+  color: #9ca3af; /* UPDATED: Softer color */
+  font-size: 0.7rem; /* UPDATED: Consistent font size */
+}
+.breadcrumb-item.active {
+  color: #6B7B9B; /* UPDATED: Theme color for inactive text */
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* Main Form Container */
+.form-container {
+  background-color: #FFFFFF; /* UPDATED: Theme color */
+  border-radius: 16px; /* UPDATED: Softer corners */
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08); /* UPDATED: Modern shadow */
+  padding: 2.5rem; /* UPDATED: More padding */
+  margin-bottom: 24px;
+}
+
+/* Form Header */
+.form-header {
+  margin-bottom: 2rem; /* UPDATED: More spacing */
+}
+.form-title {
+  font-size: 2rem; /* UPDATED: Consistent font size */
+  font-weight: 700;
+  color: #2D4059; /* UPDATED: Theme color */
+  margin-bottom: 8px;
+}
+.form-description {
+  color: #6B7B9B; /* UPDATED: Theme color */
+  margin-bottom: 16px;
+  line-height: 1.5;
+  font-size: 1rem;
+}
+
+/* Documents Info Box */
+.documents-container {
+  background-color: #eef2ff; /* UPDATED: Theme color */
+  border: 1px solid #c7d2fe; /* UPDATED: Theme color */
+  border-left: 4px solid #3A4A7B; /* ADDED: Accent border */
+  border-radius: 8px; /* UPDATED: Consistent radius */
+  padding: 1rem; /* UPDATED: Consistent padding */
+}
+.documents-title {
+  font-weight: 600;
+  color: #2D4059; /* UPDATED: Theme color */
+  margin-bottom: 8px;
+  font-size: 1rem; /* UPDATED: Consistent font size */
+}
+.documents-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  color: #3A4A7B; /* UPDATED: Theme color */
+  font-size: 0.9rem;
+}
+.documents-list li {
+  margin-bottom: 4px;
+}
+
+/* Form Grid & Groups */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem; /* UPDATED: Consistent gap */
+}
+@media (min-width: 768px) {
+  .form-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+.form-group label {
+  font-size: 0.9rem; /* UPDATED: Consistent font size */
+  font-weight: 500;
+  color: #3A4A7B; /* UPDATED: Theme color */
+  margin-bottom: 8px;
+}
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+  padding: 0.8rem 1rem; /* UPDATED: Consistent padding */
+  border: 1px solid #d1d5db;
+  border-radius: 8px; /* UPDATED: Softer corners */
+  font-size: 1rem; /* UPDATED: Larger font */
+  box-sizing: border-box;
+  background-color: #F5F7FA; /* UPDATED: Theme color */
+  transition: all 0.2s ease; /* UPDATED: Animate all properties */
+}
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: #3A4A7B; /* UPDATED: Theme color */
+  box-shadow: 0 0 0 3px rgba(58, 74, 123, 0.2); /* UPDATED: Modern focus ring */
+  background-color: #FFFFFF;
+}
+.readonly-input {
+  background-color: #F5F7FA;
+  cursor: not-allowed;
+  color: #6B7B9B;
+}
+
+/* Upload Area */
+.upload-area {
+  border: 2px dashed #d1d5db;
+  border-radius: 12px; /* UPDATED: Softer corners */
+  padding: 2rem; /* UPDATED: More padding */
+  text-align: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  margin-bottom: 1.5rem; /* UPDATED: Consistent margin */
+}
+/* ADDED: Animation */
+.upload-area.drag-over,
+.upload-area:hover {
+  border-color: #3A4A7B;
+  background-color: #eef2ff;
+  transform: scale(1.02);
+}
+.upload-icon {
+  font-size: 2.5rem; /* UPDATED: Larger icon */
+  color: #9ca3af;
+  margin-bottom: 8px;
+  transition: transform 0.3s ease; /* ADDED: Animation */
+}
+.upload-area:hover .upload-icon {
+  transform: scale(1.1); /* ADDED: Animation */
+}
+.upload-text {
+  color: #6b7280;
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+/* Uploaded Files List */
+.uploaded-files-list {
+  margin-top: 1rem; /* UPDATED: Consistent margin */
+}
+.uploaded-files-list p {
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 8px;
+}
+.uploaded-file-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem; /* UPDATED: Consistent padding */
+  background-color: #f9fafb;
+  border-radius: 8px; /* UPDATED: Softer corners */
+  margin-bottom: 8px;
+  animation: slideIn 0.3s ease-out; /* ADDED: Animation */
+}
+.uploaded-file-name {
+  font-size: 14px;
+  color: #374151;
+}
+.uploaded-file-item button {
+  color: #ef4444;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease, transform 0.2s ease; /* ADDED: Animation */
+}
+.uploaded-file-item button:hover {
+  background-color: #fee2e2;
+  transform: scale(1.1); /* ADDED: Animation */
+}
+
+/* Processing Info Box */
+.processing-info {
+  background-color: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-left: 4px solid #16a34a; /* ADDED: Accent border */
+  border-radius: 8px; /* UPDATED: Consistent radius */
+  padding: 1rem; /* UPDATED: Consistent padding */
+}
+.processing-info p {
+  color: #14532d; /* UPDATED: Darker color for readability */
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+}
+.processing-info i {
+  margin-right: 0;
+}
+
+/* Action Buttons */
+.form-actions {
+  display: flex;
+  gap: 1rem; /* UPDATED: Consistent gap */
+  justify-content: flex-end; /* UPDATED: Align buttons to the right */
+  margin-top: 2rem; /* UPDATED: More spacing */
+  padding-top: 1.5rem;
+  border-top: 1px solid #E5E7EB;
+}
+.submit-button, .cancel-button {
+  padding: 0.8rem 1.5rem; /* UPDATED: Consistent padding */
+  border-radius: 8px; /* UPDATED: Softer corners */
+  font-weight: 600; /* UPDATED: Bolder font */
+  transition: all 0.2s ease; /* ADDED: Animation */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: none;
+  cursor: pointer;
+}
+.submit-button {
+  background-color: #FF5722; /* UPDATED: Theme color */
+  color: white;
+}
+.submit-button:hover:not(:disabled) {
+  background-color: #E64A19; /* UPDATED: Theme color */
+  transform: translateY(-2px); /* ADDED: Animation */
+  box-shadow: 0 4px 15px rgba(255, 87, 34, 0.3); /* ADDED: Animation */
+}
+.cancel-button {
+  background-color: #eef2ff; /* UPDATED: Theme color */
+  color: #3A4A7B; /* UPDATED: Theme color */
+}
+.cancel-button:hover {
+  background-color: #e0e7ff; /* UPDATED: Theme color */
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Pop-up Modal Styles */
+.modal-backdrop {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background-color: rgba(45, 64, 89, 0.6); /* UPDATED: Theme color */
+  display: flex; justify-content: center; align-items: center;
+  z-index: 2000;
+  backdrop-filter: blur(5px); /* ADDED: Frosted glass effect */
+  animation: fadeInBackdrop 0.3s ease-out forwards; /* UPDATED: Renamed animation */
+}
+.modal-content {
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* UPDATED: Softer shadow */
+  width: 90%; max-width: 450px;
+  padding: 2.5rem; /* UPDATED: More padding */
+  text-align: center;
+  border-top: 8px solid;
+  animation: modalSlideIn 0.4s ease-out forwards; /* UPDATED: Renamed animation */
+}
+.modal-content.success { border-color: #16a34a; }
+.modal-content.error { border-color: #dc2626; }
+.icon-wrapper { font-size: 4rem; margin-bottom: 1rem; }
+.icon-wrapper .fa-check-circle { color: #16a34a; }
+.icon-wrapper .fa-times-circle { color: #dc2626; }
+.modal-title { font-size: 1.75rem; font-weight: 700; color: #2D4059; margin: 0 0 0.5rem 0; }
+.modal-message { font-size: 1rem; color: #6B7B9B; line-height: 1.6; margin-bottom: 2rem; }
+.modal-button {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s; /* UPDATED: Transition */
+  color: white;
+}
+.modal-content.success .modal-button { background-color: #16a34a; }
+.modal-content.error .modal-button { background-color: #dc2626; }
+.modal-button:hover { filter: brightness(1.1); }
+.modal-button:active { transform: scale(0.98); }
+
+/* Animations */
+@keyframes fadeInBackdrop { from { opacity: 0; } to { opacity: 1; } }
+@keyframes modalSlideIn { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+  .form-container {
+    padding: 1.5rem; /* UPDATED: Consistent padding */
+  }
+  .form-title {
+    font-size: 20px;
+  }
+  .form-actions {
+    flex-direction: column;
+  }
+  .submit-button, .cancel-button {
+    width: 100%;
+  }
+  .modal-content {
+    width: 90%;
+    padding: 1.5rem;
+  }
+  .modal-title {
+    font-size: 1.25rem;
+  }
+}

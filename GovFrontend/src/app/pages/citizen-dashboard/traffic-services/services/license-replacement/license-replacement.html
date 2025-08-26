@@ -1,0 +1,121 @@
+<div class="page">
+  <nav class="breadcrumb-nav">
+    <ol class="breadcrumb-list">
+      <li><a routerLink="/citizen-dashboard" class="breadcrumb-link">Dashboard</a></li>
+      <li class="breadcrumb-separator"><i class="fas fa-chevron-right"></i></li>
+      <li><a routerLink="/traffic-services" class="breadcrumb-link">Traffic Services</a></li>
+      <li class="breadcrumb-separator"><i class="fas fa-chevron-right"></i></li>
+      <li class="breadcrumb-item active">Apply for Service</li>
+    </ol>
+  </nav>
+
+  <div class="form-container">
+    <div class="form-header">
+      <h1 class="form-title">License Replacement</h1>
+      <p class="form-description">Request a replacement for your lost or damaged driver's license</p>
+      <div class="documents-container">
+        <h3 class="documents-title">Required Documents:</h3>
+        <ul class="documents-list">
+          <li class="document-item">• Police Report (for lost licenses)</li>
+          <li class="document-item">• National ID copy</li>
+          <li class="document-item">• Recent photograph</li>
+          <li class="document-item">• Damaged license (if applicable)</li>
+        </ul>
+      </div>
+    </div>
+
+    <form [formGroup]="replacementForm" (ngSubmit)="onSubmit()" class="service-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Full Name</label>
+          <input type="text" formControlName="fullName" readonly class="form-input readonly-input">
+        </div>
+        <div class="form-group">
+          <label class="form-label">National ID</label>
+          <input type="text" formControlName="nationalId" readonly class="form-input readonly-input">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Current License Number *</label>
+          <input type="text" formControlName="licenseNumber" required class="form-input" [class.input-error]="replacementForm.get('licenseNumber')?.invalid && replacementForm.get('licenseNumber')?.touched">
+          <div *ngIf="replacementForm.get('licenseNumber')?.invalid && replacementForm.get('licenseNumber')?.touched" class="error-message">
+            License number is required
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">License Category *</label>
+          <select formControlName="licenseCategory" class="form-select">
+            <option value="Private Vehicle">Private Vehicle</option>
+            <option value="Motorcycle">Motorcycle</option>
+            <option value="Commercial Vehicle">Commercial Vehicle</option>
+            <option value="Heavy Vehicle">Heavy Vehicle</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Reason for Replacement *</label>
+        <select formControlName="reason" class="form-select" [class.input-error]="replacementForm.get('reason')?.invalid && replacementForm.get('reason')?.touched">
+          <option value="">Select a reason</option>
+          <option value="Lost">Lost</option>
+          <option value="Stolen">Stolen</option>
+          <option value="Damaged">Damaged</option>
+          <option value="Change of Information">Change of Information</option>
+        </select>
+        <div *ngIf="replacementForm.get('reason')?.invalid && replacementForm.get('reason')?.touched" class="error-message">
+          Please select a reason for replacement
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Document Attachments *</label>
+        <div class="upload-area" (click)="fileInput.click()" (drop)="onFileDrop($event)" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)" [class.drag-over]="isDragOver">
+          <i class="fas fa-cloud-upload-alt upload-icon"></i>
+          <p class="upload-text">Drag and drop files here or click to browse</p>
+          <input type="file" multiple (change)="onFileSelected($event)" class="file-input" #fileInput accept="image/png, image/jpeg, application/pdf">
+          <button type="button" class="upload-button">
+            Choose Files
+          </button>
+        </div>
+        <div *ngIf="uploadedFiles.length > 0" class="uploaded-files">
+          <p class="uploaded-files-title">Selected files:</p>
+          <div *ngFor="let file of uploadedFiles; let i = index" class="file-item">
+            <span class="file-name">{{ file.name }}</span>
+            <button type="button" (click)="removeFile(i)" class="remove-file-button">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="processing-info">
+        <p class="processing-text"><i class="fas fa-clock"></i> Estimated processing time: 3-5 business days</p>
+        <p class="processing-text" style="color: #1e40af; margin-top: 8px;"><i class="fas fa-money-bill-wave"></i> Replacement fee: 50 EGP</p>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" [disabled]="isSubmitting" class="submit-button">
+          <i class="fas fa-paper-plane"></i>
+          {{ isSubmitting ? 'Submitting...' : 'Submit Request' }}
+        </button>
+        <button type="button" (click)="onCancel()" class="cancel-button">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="modal-backdrop" *ngIf="isAlertVisible" (click)="hideAlert()">
+  <div class="modal-content" (click)="$event.stopPropagation()" [ngClass]="alertType">
+    <div class="icon-wrapper">
+      <i *ngIf="alertType === 'success'" class="fas fa-check-circle"></i>
+      <i *ngIf="alertType === 'error'" class="fas fa-times-circle"></i>
+    </div>
+    <h2 class="modal-title">{{ alertTitle }}</h2>
+    <p class="modal-message">{{ alertMessage }}</p>
+    <button class="modal-button" (click)="hideAlert()">Close</button>
+  </div>
+</div>

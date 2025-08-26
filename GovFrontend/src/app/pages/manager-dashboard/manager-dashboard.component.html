@@ -1,0 +1,45 @@
+<div class="dashboard-layout">
+  <aside class="sidebar">
+    <div *ngIf="user() as currentUser" class="user-info">
+      <div class="user-avatar">
+        <span>{{ getInitials(currentUser.fullName) }}</span>
+      </div>
+      <div>
+        <p class="user-name">{{ currentUser.fullName }}</p>
+        <p class="user-role">{{ currentUser.role | titlecase }}</p>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <a
+        routerLink="/manager-dashboard"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="nav-link"
+      >
+        <i class="fas fa-tachometer-alt"></i>Dashboard
+      </a>
+      <a routerLink="/reports" routerLinkActive="active" class="nav-link">
+        <i class="fas fa-chart-bar"></i>Reports
+      </a>
+      <a routerLink="/employees" routerLinkActive="active" class="nav-link">
+        <i class="fas fa-users"></i>Employees
+      </a>
+      <a routerLink="/profile" routerLinkActive="active" class="nav-link">
+        <i class="fas fa-user"></i>Profile
+      </a>
+    </nav>
+  </aside>
+
+  <main class="main-content">
+    <header class="header">
+      <h1 class="header-title">Manager Dashboard</h1>
+      <p class="header-subtitle">
+        Monitor performance and analytics across departments
+      </p>
+    </header>
+
+    <app-manager-analytics></app-manager-analytics>
+    <app-employee-performance></app-employee-performance>
+    <app-system-alerts></app-system-alerts>
+  </main>
+</div>

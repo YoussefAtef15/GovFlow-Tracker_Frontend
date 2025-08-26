@@ -1,0 +1,64 @@
+/* =================================
+    Employee Management Styles
+   ================================= */
+.page-container { padding: 2rem; background-color: #F5F7FA; }
+.breadcrumb { margin-bottom: 2rem; }
+.breadcrumb ol { list-style: none; padding: 0; margin: 0; display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; color: #6B7B9B; }
+.breadcrumb a { color: #3A4A7B; text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
+
+.page-header { display: flex; justify-content: space-between; align-items: center; }
+.page-header h1 { font-size: 2rem; font-weight: 700; color: #2D4059; }
+.page-subtitle { color: #6B7B9B; margin-top: 0.5rem; margin-bottom: 2rem; font-size: 1rem; }
+
+.table-card { background-color: #FFFFFF; border-radius: 16px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07); padding: 2rem; }
+.employees-table { width: 100%; border-collapse: collapse; }
+.employees-table th {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #6B7B9B;
+  text-transform: uppercase;
+  border-bottom: 2px solid #E5E7EB;
+}
+.employees-table td { padding: 1.25rem 1rem; font-size: 0.95rem; color: #2D4059; border-bottom: 1px solid #F5F7FA; }
+.employees-table tbody tr:hover { background-color: #F5F7FA; }
+
+.employee-cell { display: flex; align-items: center; gap: 1rem; }
+.avatar { width: 40px; height: 40px; border-radius: 50%; background: #3A4A7B; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 600; }
+.emp-name { font-weight: 600; margin: 0; }
+.emp-email { font-size: 0.85rem; color: #6B7B9B; margin: 0; }
+
+.status-badge { padding: 0.3rem 0.8rem; border-radius: 99px; font-size: 0.8rem; font-weight: 500; }
+.status-active { background-color: #dcfce7; color: #166534; }
+.status-inactive { background-color: #fee2e2; color: #991b1b; }
+
+.action-buttons { display: flex; gap: 0.5rem; }
+.action-btn { background: none; border: 1px solid transparent; padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; font-weight: 500; transition: all 0.2s; }
+.edit-btn { color: #3A4A7B; background-color: #eef2ff; }
+.edit-btn:hover { background-color: #e0e7ff; }
+.delete-btn { color: #991b1b; background-color: #fee2e2; }
+.delete-btn:hover { background-color: #fecaca; }
+
+/* Buttons & Modal Styles */
+.add-btn, .btn-primary, .btn-secondary, .btn-danger {
+  border: none; padding: 0.7rem 1.5rem; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.2s ease;
+}
+.add-btn, .btn-primary { background-color: #FF5722; color: #FFFFFF; }
+.add-btn:hover, .btn-primary:hover { background-color: #E64A19; transform: translateY(-2px); box-shadow: 0 4px 10px rgba(255, 87, 34, 0.3); }
+.btn-secondary { background-color: #eef2ff; color: #3A4A7B; }
+.btn-secondary:hover { background-color: #e0e7ff; }
+.btn-danger { background-color: #dc2626; color: #FFFFFF; }
+.btn-danger:hover { background-color: #b91c1c; }
+
+.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(45, 64, 89, 0.6); display: flex; justify-content: center; align-items: center; z-index: 1000; backdrop-filter: blur(5px); }
+.modal-content { background: white; padding: 2rem; border-radius: 16px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); width: 90%; max-width: 500px; }
+.modal-title { font-size: 1.5rem; font-weight: 600; color: #2D4059; margin: 0 0 1.5rem 0; }
+.modal-actions { display: flex; justify-content: flex-end; gap: 1rem; margin-top: 1.5rem; }
+.form-group { margin-bottom: 1rem; }
+.form-group label { display: block; font-size: 0.9rem; font-weight: 500; color: #3A4A7B; margin-bottom: 0.5rem; }
+.form-group input { width: 100%; padding: 0.8rem 1rem; border: 1px solid #D1D5DB; border-radius: 8px; }
+.confirm-modal { text-align: center; }
+.confirm-icon { font-size: 3rem; color: #f59e0b; margin-bottom: 1rem; }
+.confirm-text { color: #6B7B9B; margin: 1rem 0; }
