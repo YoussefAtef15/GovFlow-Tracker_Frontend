@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "node server.js",
     "build": "ng build --configuration production",
+    "start": "npm run build && npx serve -s dist/gov-frontend -l $PORT",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
@@ -35,9 +35,9 @@
     "@angular/router": "^20.1.0",
     "@ngx-translate/core": "^17.0.0",
     "@ngx-translate/http-loader": "^17.0.0",
-    "express": "^4.21.1",
     "jwt-decode": "^4.0.0",
     "rxjs": "~7.8.0",
+    "serve": "^14.2.3",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
   },
