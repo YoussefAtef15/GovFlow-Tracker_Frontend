@@ -16,7 +16,7 @@ interface User {
   providedIn: 'root'
 })
 export class AuthService {
-  private baseUrl = 'http://govflow-trackerfrontendjar-production.up.railway.app/api/auth';
+  private baseUrl = 'https://govflow-trackerfrontendjar-production.up.railway.app/api/auth';
   currentUser = signal<User | null>(null);
   private storage: Storage | null = null;
 
