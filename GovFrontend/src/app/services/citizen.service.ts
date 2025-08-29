@@ -39,7 +39,7 @@ export interface CitizenDashboardData {
   providedIn: 'root'
 })
 export class CitizenService {
-  private apiUrl = 'http://localhost:8080/api/citizen';
+  private apiUrl = 'https://govflow-trackerfrontendjar-production.up.railway.app/api/citizen';
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
