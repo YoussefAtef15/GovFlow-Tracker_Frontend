@@ -44,7 +44,7 @@ export interface TopPerformer { initials: string; name: string; department: stri
   providedIn: 'root'
 })
 export class ManagerService {
-  private baseUrl = 'http://localhost:8080/api/v1/manager';
+  private baseUrl = 'https://govflow-trackerfrontendjar-production.up.railway.app/api/v1/manager';
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
