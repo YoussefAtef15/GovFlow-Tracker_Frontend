@@ -33,7 +33,7 @@ export interface EmployeeDashboardData {
 })
 export class EmployeeService {
   // هذا هو الرابط للـ Controller الخاص بالموظف في الباك إند
-  private baseUrl = 'http://localhost:8080/api/v1/employee';
+  private baseUrl = 'https://govflow-trackerfrontendjar-production.up.railway.app/api/v1/employee';
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
