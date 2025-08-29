@@ -22,7 +22,7 @@ export interface NotificationPayload {
   providedIn: 'root'
 })
 export class NotificationService {
-  private baseUrl = 'http://localhost:8080/api';
+  private baseUrl = 'http://govflow-trackerfrontendjar-production.up.railway.app/api';
 
   // A Subject to broadcast notification messages
   private notificationSubject = new Subject<NotificationPayload>();
