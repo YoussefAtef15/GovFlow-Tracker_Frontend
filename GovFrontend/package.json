@@ -4,13 +4,24 @@
   "scripts": {
     "ng": "ng",
     "build": "ng build --configuration production",
-    "start": "npx serve -s dist/gov-frontend -l $PORT",
-    "postinstall": "npm run build",
+    "start": "serve -s dist/gov-frontend",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
   "engines": {
-    "node": "22.12.0"
+    "node": ">=22.12.0"
+  },
+  "prettier": {
+    "printWidth": 100,
+    "singleQuote": true,
+    "overrides": [
+      {
+        "files": "*.html",
+        "options": {
+          "parser": "angular"
+        }
+      }
+    ]
   },
   "private": true,
   "dependencies": {
@@ -24,8 +35,6 @@
     "@angular/router": "^20.1.0",
     "@ngx-translate/core": "^17.0.0",
     "@ngx-translate/http-loader": "^17.0.0",
-    "@angular/cli": "^20.1.6",
-    "@angular/build": "^20.1.6",
     "jwt-decode": "^4.0.0",
     "rxjs": "~7.8.0",
     "serve": "^14.2.3",
@@ -33,7 +42,16 @@
     "zone.js": "~0.15.0"
   },
   "devDependencies": {
+    "@angular/build": "^20.1.6",
+    "@angular/cli": "^20.1.6",
     "@angular/compiler-cli": "^20.1.0",
+    "@types/jasmine": "~5.1.0",
+    "jasmine-core": "~5.8.0",
+    "karma": "~6.4.0",
+    "karma-chrome-launcher": "~3.2.0",
+    "karma-coverage": "~2.2.0",
+    "karma-jasmine": "~5.1.0",
+    "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.8.2"
   }
 }
