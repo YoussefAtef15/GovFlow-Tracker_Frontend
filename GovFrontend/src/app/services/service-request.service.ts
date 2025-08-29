@@ -38,8 +38,8 @@ export interface PaymentRecord {
   providedIn: 'root'
 })
 export class ServiceRequestService {
-  private baseUrl = 'http://localhost:8080/api/v1/requests';
-  private paymentsUrl = 'http://localhost:8080/api/payments';
+  private baseUrl = 'http://govflow-trackerfrontendjar-production.up.railway.app/v1/requests';
+  private paymentsUrl = 'http://govflow-trackerfrontendjar-production.up.railway.app/api/payments';
   constructor(private http: HttpClient, private authService: AuthService) {}
 
   getMyRequests(): Observable<ServiceRequestDto[]> {
