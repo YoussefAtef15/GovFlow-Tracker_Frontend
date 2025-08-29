@@ -21,6 +21,9 @@ FROM nginx:stable-alpine
 # Copy the built files from the build stage to the Nginx server directory
 COPY --from=build /app/dist/gov-frontend /usr/share/nginx/html
 
+# Copy the Nginx configuration to ensure all routes work correctly
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
 # Expose port 80 to the outside world
 EXPOSE 80
 
