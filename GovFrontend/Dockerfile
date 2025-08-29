@@ -20,7 +20,7 @@ FROM nginx:stable-alpine
 
 # Copy the built files from the build stage to the Nginx server directory
 # Make sure the path "dist/gov-frontend" matches your angular.json "outputPath"
-COPY --from=build /app/dist/gov-frontend /usr/share/nginx/html
+COPY --from=build /app/dist/GovFrontend/browser /usr/share/nginx/html
 
 # Copy the Nginx configuration to ensure all routes work correctly
 COPY nginx.conf /etc/nginx/conf.d/default.conf
@@ -30,3 +30,4 @@ EXPOSE 80
 
 # Start Nginx when the container launches
 CMD ["nginx", "-g", "daemon off;"]
+
